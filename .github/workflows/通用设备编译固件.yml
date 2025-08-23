@@ -108,7 +108,10 @@ jobs:
 
       - name: Install feeds
         run: cd openwrt/ && ./scripts/feeds install -a
-
+      - name: Remove with_ech build tag
+        run: |
+          sed -i 's/\bwith_ech\b//g' feeds/packages/net/sing-box/Makefile
+          
       - name: Load custom configuration
         run: |
           [[ -d "files" ]] && mv -f files openwrt/files
